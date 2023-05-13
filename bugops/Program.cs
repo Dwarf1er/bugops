@@ -1,4 +1,12 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using bugops.Areas.Identity.Data;
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("BugopsDbContextConnection") ?? throw new InvalidOperationException("Connection string 'BugopsDbContextConnection' not found.");
+
+builder.Services.AddDbContext<BugopsDbContext>(options => options.UseSqlServer(connectionString));
+
+builder.Services.AddDefaultIdentity<BugopsUser>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<BugopsDbContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -23,5 +31,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapRazorPages();
 
 app.Run();
