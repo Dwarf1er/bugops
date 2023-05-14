@@ -47,6 +47,32 @@ namespace bugops.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            Name = "Developer",
+                            NormalizedName = "DEVELOPER"
+                        },
+                        new
+                        {
+                            Id = "3",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = "4",
+                            Name = "Demo",
+                            NormalizedName = "DEMO"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -136,6 +162,28 @@ namespace bugops.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "1",
+                            RoleId = "1"
+                        },
+                        new
+                        {
+                            UserId = "2",
+                            RoleId = "2"
+                        },
+                        new
+                        {
+                            UserId = "3",
+                            RoleId = "3"
+                        },
+                        new
+                        {
+                            UserId = "4",
+                            RoleId = "4"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -232,6 +280,80 @@ namespace bugops.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "88cd6f2e-3c12-4a39-b6ed-bcc4a134595d",
+                            Email = "administrator@example.com",
+                            EmailConfirmed = true,
+                            FirstName = "Administrator",
+                            LastName = "Administrator",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMINISTRATOR@EXAMPLE.COM",
+                            NormalizedUserName = "ADMINISTRATOR@EXAMPLE.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDWcCbVRflXDD9rS6v+np63653kvkt6JzJWPqpHhZPHuFNC05Unnm4PRQGRAYEz1KQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "c59d4051-8e9b-46a9-b80d-2e733910da6f",
+                            TwoFactorEnabled = false,
+                            UserName = "administrator@example.com"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "3655506d-9605-4006-bfc8-7e536a2ff4d6",
+                            Email = "developer@example.com",
+                            EmailConfirmed = true,
+                            FirstName = "Developer",
+                            LastName = "Developer",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "DEVELOPER@EXAMPLE.COM",
+                            NormalizedUserName = "DEVELOPER@EXAMPLE.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDWcCbVRflXDD9rS6v+np63653kvkt6JzJWPqpHhZPHuFNC05Unnm4PRQGRAYEz1KQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "dde8d28d-f894-4de8-a1ff-dff9140da5a7",
+                            TwoFactorEnabled = false,
+                            UserName = "developer@example.com"
+                        },
+                        new
+                        {
+                            Id = "3",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "2ee96690-7851-4aea-84d3-b0503037101d",
+                            Email = "user@example.com",
+                            EmailConfirmed = true,
+                            FirstName = "User",
+                            LastName = "User",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "USER@EXAMPLE.COM",
+                            NormalizedUserName = "USER@EXAMPLE.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDWcCbVRflXDD9rS6v+np63653kvkt6JzJWPqpHhZPHuFNC05Unnm4PRQGRAYEz1KQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "270781ab-0fd8-43a8-84de-85c46464dc75",
+                            TwoFactorEnabled = false,
+                            UserName = "user@example.com"
+                        },
+                        new
+                        {
+                            Id = "4",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "dbe73d72-251f-44ff-8a93-ec2581fe4500",
+                            Email = "demo@example.com",
+                            EmailConfirmed = true,
+                            FirstName = "Demo",
+                            LastName = "Demo",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "DEMO@EXAMPLE.COM",
+                            NormalizedUserName = "DEMO@EXAMPLE.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDWcCbVRflXDD9rS6v+np63653kvkt6JzJWPqpHhZPHuFNC05Unnm4PRQGRAYEz1KQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "51420608-3bc0-471a-9a60-e153635f4eee",
+                            TwoFactorEnabled = false,
+                            UserName = "demo@example.com"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using bugops.Areas.Identity.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("BugopsDbContextConnection") ?? throw new InvalidOperationException("Connection string 'BugopsDbContextConnection' not found.");
 
@@ -11,11 +12,14 @@ builder.Services.AddDefaultIdentity<BugopsUser>(options => options.SignIn.Requir
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+#region Authorization
+AddAuthorizationPolicies(builder.Services);
+#endregion
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
+if (!app.Environment.IsDevelopment()) {
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
@@ -25,7 +29,6 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
 app.UseAuthorization();
 
 app.MapControllerRoute(
@@ -35,3 +38,9 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 app.Run();
+
+void AddAuthorizationPolicies(IServiceCollection services) {
+    services.AddAuthorization(options => {
+        options.AddPolicy("EmployeeOnly", policy => policy.RequireClaim("EmployeeNumber"));
+    });
+}

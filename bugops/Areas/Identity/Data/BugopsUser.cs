@@ -7,9 +7,8 @@ using Microsoft.AspNetCore.Identity;
 namespace bugops.Areas.Identity.Data;
 
 // Add profile data for application users by adding properties to the BugopsUser class
-public class BugopsUser : IdentityUser
-{
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
+public class BugopsUser : IdentityUser {
+    public string FirstName { get; set; } = string.Empty;
+    public string LastName { get; set; } = string.Empty;
 }
 
