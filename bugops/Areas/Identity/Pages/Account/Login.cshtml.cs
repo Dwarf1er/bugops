@@ -105,11 +105,19 @@ namespace bugops.Areas.Identity.Pages.Account {
             if (ModelState.IsValid) {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+                BugopsUser user = await _signInManager.UserManager.FindByNameAsync(Input.Email);
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded) {
-                    var claims = new Claim[] {
+                    List<Claim> claims = new List<Claim> {
                         new Claim("amr", "pwd"),
                     };
+
+                    IList<string> roles = await _signInManager.UserManager.GetRolesAsync(user);
+
+                    if (roles.Any()) {
+                        string roleClaim = string.Join(",", roles);
+                        claims.Add(new Claim("Roles", roleClaim));
+                    }
 
                     _logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);

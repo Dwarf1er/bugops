@@ -3,8 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace bugops.Controllers {
     public class RoleController : Controller {
-        [Authorize(Policy = "EmployeeOnly")]
         public IActionResult Index() {
+            return View();
+        }
+
+        [Authorize(Policy = "RequireAdministrator")]
+        public IActionResult Administrator() {
             return View();
         }
     }

@@ -6,8 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("BugopsDbContextConnection") ?? throw new InvalidOperationException("Connection string 'BugopsDbContextConnection' not found.");
 
 builder.Services.AddDbContext<BugopsDbContext>(options => options.UseSqlServer(connectionString));
-
-builder.Services.AddDefaultIdentity<BugopsUser>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<BugopsDbContext>();
+builder.Services.AddDefaultIdentity<BugopsUser>(options => options.SignIn.RequireConfirmedAccount = false).AddRoles<IdentityRole>().AddEntityFrameworkStores<BugopsDbContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -41,6 +40,6 @@ app.Run();
 
 void AddAuthorizationPolicies(IServiceCollection services) {
     services.AddAuthorization(options => {
-        options.AddPolicy("EmployeeOnly", policy => policy.RequireClaim("EmployeeNumber"));
+        options.AddPolicy("RequireAdministrator", policy => policy.RequireRole("Administrator"));
     });
 }
