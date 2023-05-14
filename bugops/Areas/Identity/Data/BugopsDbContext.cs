@@ -1,4 +1,5 @@
 ﻿using bugops.Areas.Identity.Data;
+using bugops.Common;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -16,10 +17,10 @@ public class BugopsDbContext : IdentityDbContext<BugopsUser> {
         builder.ApplyConfiguration(new BugopsUserEntityConfiguration());
 
         builder.Entity<IdentityRole>().HasData(
-            new IdentityRole { Id = "1", Name = "Administrator", NormalizedName = "ADMINISTRATOR" },
-            new IdentityRole { Id = "2", Name = "Developer", NormalizedName = "DEVELOPER" },
-            new IdentityRole { Id = "3", Name = "User", NormalizedName = "USER" },
-            new IdentityRole { Id = "4", Name = "Demo", NormalizedName = "DEMO" }
+            new IdentityRole { Id = "1", Name = Constants.Roles.Administrator, NormalizedName = Constants.Roles.Administrator.ToUpper() },
+            new IdentityRole { Id = "2", Name = Constants.Roles.Developer, NormalizedName = Constants.Roles.Developer.ToUpper() },
+            new IdentityRole { Id = "3", Name = Constants.Roles.User, NormalizedName = Constants.Roles.User.ToUpper() },
+            new IdentityRole { Id = "4", Name = Constants.Roles.Demo, NormalizedName = Constants.Roles.Demo.ToUpper() }
         );
 
         // WARNING: This is VERY insecure, this app is meant for demo purposes

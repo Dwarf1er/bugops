@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using bugops.Areas.Identity.Data;
+using bugops.Common;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("BugopsDbContextConnection") ?? throw new InvalidOperationException("Connection string 'BugopsDbContextConnection' not found.");
@@ -40,6 +41,6 @@ app.Run();
 
 void AddAuthorizationPolicies(IServiceCollection services) {
     services.AddAuthorization(options => {
-        options.AddPolicy("RequireAdministrator", policy => policy.RequireRole("Administrator"));
+        options.AddPolicy(Constants.Policies.RequireAdministrator, policy => policy.RequireRole(Constants.Roles.Administrator));
     });
 }

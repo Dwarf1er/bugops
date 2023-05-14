@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using bugops.Common;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace bugops.Controllers {
@@ -7,7 +8,7 @@ namespace bugops.Controllers {
             return View();
         }
 
-        [Authorize(Policy = "RequireAdministrator")]
+        [Authorize(Policy = Constants.Policies.RequireAdministrator)]
         public IActionResult Administrator() {
             return View();
         }

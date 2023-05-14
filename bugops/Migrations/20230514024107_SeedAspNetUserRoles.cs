@@ -1,26 +1,24 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using bugops.Common;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace bugops.Migrations
-{
+namespace bugops.Migrations {
     /// <inheritdoc />
-    public partial class SeedAspNetUserRoles : Migration
-    {
+    public partial class SeedAspNetUserRoles : Migration {
         /// <inheritdoc />
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
+        protected override void Up(MigrationBuilder migrationBuilder) {
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1", null, "Administrator", "ADMINISTRATOR" },
-                    { "2", null, "Developer", "DEVELOPER" },
-                    { "3", null, "User", "USER" },
-                    { "4", null, "Demo", "DEMO" }
+                    { "1", null, Constants.Roles.Administrator, Constants.Roles.Administrator.ToUpper() },
+                    { "2", null, Constants.Roles.Developer, Constants.Roles.Developer.ToUpper() },
+                    { "3", null, Constants.Roles.User, Constants.Roles.User.ToUpper() },
+                    { "4", null, Constants.Roles.Demo, Constants.Roles.Demo.ToUpper() }
                 });
 
             migrationBuilder.InsertData(
@@ -47,8 +45,7 @@ namespace bugops.Migrations
         }
 
         /// <inheritdoc />
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
+        protected override void Down(MigrationBuilder migrationBuilder) {
             migrationBuilder.DeleteData(
                 table: "AspNetUserRoles",
                 keyColumns: new[] { "RoleId", "UserId" },
